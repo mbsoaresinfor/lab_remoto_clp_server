@@ -9,38 +9,28 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.websocket.server.PathParam;
+
 @RestController
 public class ClpController {
 
-	private Map<String,Integer> statusInterfaces = new LinkedHashMap<String,Integer>();
+	private String saidaDigitais = "{\"OUT1\":1,\"OUT2\":0,\"OUT3\":0,\"OUT4\":0,\"OUT5\":0,\"OUT6\":0,\"OUT7\":0,\"OUT8\":0,\"OUT9\":0,\"OUT10\":1}";
 	
-	public ClpController() {
-		statusInterfaces.put("OUT1", 1);
-		statusInterfaces.put("OUT2", 0);
-		statusInterfaces.put("OUT3", 1);
-		statusInterfaces.put("OUT4", 1);
-		statusInterfaces.put("OUT5", 0);
-		statusInterfaces.put("OUT6", 1);
-		statusInterfaces.put("OUT7", 1);
-		statusInterfaces.put("OUT8", 0);
-		statusInterfaces.put("OUT9", 0);
-		statusInterfaces.put("OUT10", 1);
-	}
+	// TODO impl. está com problema.
+	@GetMapping("/alterarSaidaDigitais/{value}")
+	 public String alterarSaidaDigitais(@PathParam("value") String value){
+		 
+		 saidaDigitais = value;
+		 System.out.println("alterarSaidaDigitais: "+saidaDigitais );
+		 return saidaDigitais;
+	 }
 	
 	 @GetMapping("/lerSaidaDigitais")
 	 public String lerSaidaDigitais(){
-		 StringBuilder retorno = new StringBuilder("{");
-		 int cont = 0;
-		 for (Map.Entry<String, Integer> entry : statusInterfaces.entrySet()) {			 
-			 retorno.append("\"").append(entry.getKey()).append("\"").append(":");
-			 retorno.append(entry.getValue());
-			 cont++;
-			 if(cont != statusInterfaces.size()) {
-				 retorno.append(",");
-			 }			 
-		  }
-		 retorno.append("}");
-		 return retorno.toString();
+		 
+		 
+		 System.out.println("lerSaidaDigitais: "+saidaDigitais );
+		 return saidaDigitais;
 	 }
 	 
 	 @PostMapping("/gravarInterfaces")

@@ -5,6 +5,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -14,19 +16,19 @@ public class ClpController {
 	
 	public ClpController() {
 		statusInterfaces.put("OUT1", 1);
-		statusInterfaces.put("OUT2", 2);
-		statusInterfaces.put("OUT3", 3);
-		statusInterfaces.put("OUT4", 4);
-		statusInterfaces.put("OUT5", 5);
-		statusInterfaces.put("OUT6", 6);
-		statusInterfaces.put("OUT7", 7);
-		statusInterfaces.put("OUT8", 8);
-		statusInterfaces.put("OUT9", 9);
-		statusInterfaces.put("OUT10", 10);
+		statusInterfaces.put("OUT2", 0);
+		statusInterfaces.put("OUT3", 1);
+		statusInterfaces.put("OUT4", 1);
+		statusInterfaces.put("OUT5", 0);
+		statusInterfaces.put("OUT6", 1);
+		statusInterfaces.put("OUT7", 1);
+		statusInterfaces.put("OUT8", 0);
+		statusInterfaces.put("OUT9", 0);
+		statusInterfaces.put("OUT10", 1);
 	}
 	
-	 @GetMapping("/getSaidaDigitais")
-	 public String getSaidaDigitais(){
+	 @GetMapping("/lerSaidaDigitais")
+	 public String lerSaidaDigitais(){
 		 StringBuilder retorno = new StringBuilder("{");
 		 int cont = 0;
 		 for (Map.Entry<String, Integer> entry : statusInterfaces.entrySet()) {			 
@@ -39,6 +41,12 @@ public class ClpController {
 		  }
 		 retorno.append("}");
 		 return retorno.toString();
+	 }
+	 
+	 @PostMapping("/gravarInterfaces")
+	 public void gravarInterfaces(@RequestBody String valor) {
+		 
+		 System.out.println("gravarInterfaces: " + valor);
 	 }
 	
 	
